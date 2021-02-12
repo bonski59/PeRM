@@ -21,3 +21,7 @@ def refresh():                                  # this is difficult to test due 
 
     # Quit
     xlapp.Quit()
+
+    return #just need to find a way to open the excel doc per the flow chart request
+
+
