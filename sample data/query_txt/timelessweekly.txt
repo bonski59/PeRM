@@ -1,0 +1,28 @@
+SELECT `VendorDrill`.`SKU_Nbr` AS `C_SKU_Nbr`,
+       `VendorDrill`.`Short_Week` AS `C_Short_Week`,
+       `VendorDrill`.`d_Market` AS `C_d_Market`,
+       `VendorDrill`.`d_Market_Nbr` AS `C_d_Market_Nbr`,
+       `VendorDrill`.`d_Store` AS `C_d_Store`,
+       `VendorDrill`.`d_Store_Nbr` AS `C_d_Store_Nbr`,
+       `VendorDrill`.`sku1` AS `C_sku1`,
+       `VendorDrill`.`year1_1` AS `C_year1_1`,
+       `VendorDrill`.`Sales_Units` AS `C_Sales_Units`,
+       `VendorDrill`.`Sales_Units_LY` AS `C_Sales_Units_LY`,
+       `VendorDrill`.`sales` AS `C_sales`,
+       `VendorDrill`.`sales_ly` AS `C_sales_ly`
+FROM `VendorDrill`.`VendorDrill` `VendorDrill`
+WHERE `VendorDrill`.`Fulfillment Channel` IN ('In Store')
+  AND `VendorDrill`.`Merch_Vendor_Nbr` IN (22561,
+                                           769444)
+  AND `VendorDrill`.`SKU_Nbr` IN (1003912161,
+                                  1005945472)
+  AND `VendorDrill`.`SKU_Status` IN ('100-ACTIVE')
+  AND `VendorDrill`.`Day1_2` >= CAST('2020-01-01' AS DATE)
+GROUP BY `C_SKU_Nbr`,
+         `C_Short_Week`,
+         `C_d_Market`,
+         `C_d_Market_Nbr`,
+         `C_d_Store`,
+         `C_d_Store_Nbr`,
+         `C_sku1`,
+         `C_year1_1`
