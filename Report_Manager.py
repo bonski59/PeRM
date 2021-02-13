@@ -10,5 +10,3 @@ print(dataframe)
 # query_filepath
 # csvOUTPUT_filepath
 
-def passqueryfilepath("")
-

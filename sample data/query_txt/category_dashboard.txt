@@ -1,9 +1,0 @@
-SELECT `VendorDrill`.`Class_Nbr` AS `C_Class_Nbr`,
-       `VendorDrill`.`Short_Week` AS `C_Short_Week`,
-       `VendorDrill`.`Sales_Units` AS `C_Sales_Units`,
-       `VendorDrill`.`Str_OH_units_dly` AS `C_Str_OH_units_dly`,
-       `VendorDrill`.`sales` AS `C_sales`
-FROM `VendorDrill`.`VendorDrill` `VendorDrill`
-WHERE `VendorDrill`.`Day1_2` >= CAST('2018-01-01' AS DATE)
-GROUP BY `C_Class_Nbr`,
-         `C_Short_Week`
