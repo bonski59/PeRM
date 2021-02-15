@@ -1,4 +1,5 @@
-# this module focuses on using outlook/gmail(for testing) to build email attachments with required content and send them to the required recipients
+# this module focuses on using outlook/gmail(for testing) to build email attachments with required content and send
+# them to the required recipients
 
 import os.path
 import smtplib
@@ -8,6 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
+# noinspection PyBroadException
 def send_email(email_recipient,
                email_subject,
                email_message,
@@ -44,18 +46,6 @@ def send_email(email_recipient,
     return True
 
 
-
 send_email('corbinkelly15@gmail.com',
            'Excel Email',
-           'I sent this with python.... this is a burner account', 'D:\git\PeRM\PeRM\Book1.xlsx')
-
-
-# yo
-
-
-# recommend sending confirmation email, i.e. adding your work email into the "TO:" line so you can see it on your phone if needed.
-
-# TODO: make email messaging time based
-# TODO: make email messaging execution based (send email to burner account, upon rx burner calls PeRM and emails explicit or implicit target
-# TODO: Create Log that tracks all the actions that PeRM does "Time/action"
-# TODO: Use windows task scheduler to time execution every monday morning
+           'I sent this with python.... this is a burner account', r'D:\git\PeRM\PeRM\Book1.xlsx')
