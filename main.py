@@ -39,7 +39,7 @@ this satisfies Step 1
 
 rfex.refresh_all_reports()
 """
-takes reports_xlsx file patha and iterates through all files and refreshes them.
+takes reports_xlsx file path and iterates through all files and refreshes them.
 this is explicit to xlsx files 
 may encounter error if other filetypes exist in directory
 """

@@ -3,7 +3,7 @@ import pandas as pd
 import folders
 
 
-def read_report_details():
+def read_report_details():  # reads csv and pulls valid query txt files into an array
     df = pd.read_csv(folders.Paths.reportCSV, delimiter=',', engine="python")
     row_count = int(df.shape[0])        # defines num of rows in csv
     dict_df = df.to_dict()              # turns csv into dict so we can referance values by headers
