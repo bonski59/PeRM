@@ -1,15 +1,10 @@
 import pandas as pd
-import os
 
-cwd = os.getcwd()
-
-report_details_fp = r'{}\dataManagement\REPORT_DETAIL.csv'.format(cwd)
-
-excel_data_df = pd.read_csv(report_details_fp)
+import folders
 
 
 def read_report_details():
-    df = pd.read_csv(report_details_fp, delimiter=',', engine="python")
+    df = pd.read_csv(folders.Paths.reportCSV, delimiter=',', engine="python")
     row_count = int(df.shape[0])        # defines num of rows in csv
     dict_df = df.to_dict()              # turns csv into dict so we can referance values by headers
     print(dict_df)                    # prints dict
@@ -31,8 +26,15 @@ def read_report_details():
         i += 1  # iterates line by line
     return return_array
 
+def confirm_xlsx_verification(xlsx_file):  # Explicit to files with a 'VERIFICATION' sheet_name
+    fp = xlsx_file
+    df = pd.read_excel(fp, sheet_name='VERIFICATION', engine='openpyxl')
+    df = str(df)
+    if "True" in df:
+        return True
+    else:
+        return False
+
 
 # print(read_report_details())
-
-
 # query_list = read_report()

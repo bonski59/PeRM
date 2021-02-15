@@ -1,15 +1,9 @@
-import os
 import pandas as pd
 import pyodbc
 
+import folders
 
-cwd = os.getcwd()
-output_csv_location = r"{}\dataManagement\reports_xlsx".format(cwd)
-
-# REPORT_FOLDER + REPORT_NAME
-# print(q_arr)
-# injects variable asd string
-
+output_csv_location = folders.Paths.reports_xlsx
 
 def vendorDrillConnection(query_arr):
     for i in query_arr:
