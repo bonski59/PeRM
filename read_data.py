@@ -35,6 +35,11 @@ def confirm_xlsx_verification(xlsx_file):  # Explicit to files with a 'VERIFICAT
     else:
         return False
 
+def read_xlxs(xlsx_file):  # Used for Testing
+    fp = xlsx_file
+    df = pd.read_excel(fp, sheet_name='Sheet1', engine='openpyxl')
+    df = str(df)
+    print(df)
 
 # print(read_report_details())
 # query_list = read_report()

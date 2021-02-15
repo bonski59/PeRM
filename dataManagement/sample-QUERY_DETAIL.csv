@@ -1,0 +1,6 @@
+﻿QUERY_ID,QUERY_NAME,REPORT_ID,STANDARD_REPORT_NAME,temp,VDDC_CSV_FilePath,QUERY_TXT_FilePath,RECURRENCE_FREQUENCY,REPORT_STATUS,NOTES
+4,PRIMARY,4,CATEGORY_DASHBOARD,s,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_1B.xlsx,,Weekly (tues),ACTIVE,12/7/2020 - I think I saved this file in OneDrive temp - and I think the underlying DataConnection query was deleted from the web-view. not sure why
+10,PRIMARY,10,KPI_REPORT,s,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_2B.xlsx,C:\Users\us160212\Documents\Python Projects\Reference Files\QUERY_TXT\KPIcategories_SQL.txt,Weekly (tues),ACTIVE,12/7/2020 - updated again using static datasource. - NEEDS TO BE REFRESHED TWICE
+15,PRIMARY,15,SkuStore_ACTIVATION,s,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_1B.xlsx,,Weekly (tues),ACTIVE,
+1,PRIMARY,1,NORTHWEST_PAINT,d,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_1B.xlsx,,Weekly (tues),ACTIVE,
+3,PRIMARY,3,TIMELESS,d,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_1B.xlsx,,Weekly (tues),ACTIVE,
