@@ -1,6 +1,4 @@
 # most of this will be a test environment to verify this works
-
-
 import time
 
 import pandas as pd
@@ -8,6 +6,7 @@ import pywintypes
 import win32com.client as win32
 
 import folders
+import read_data as rd
 
 
 def refresh(xlsx_filepath):
@@ -47,6 +46,10 @@ def refresh_xlsx_paths():
         else:
 
             refresh(xlsx_fp)
+            if not rd.confirm_xlsx_verification(xlsx_fp):
+                print("The following file has not been verified {}".format(xlsx_fp))
+            else:
+                print("VERIFIED: {}".format(xlsx_fp))
         i += 1  # iterates line by line
 
     return  # just need to find a way to open the excel doc per the flow chart request
