@@ -8,6 +8,7 @@ import pywintypes
 import win32com.client as win32
 
 import folders
+import read_data as rd
 
 
 def refresh(xlsx_filepath):
@@ -30,6 +31,7 @@ def refresh(xlsx_filepath):
     print("REFRESHED COMPLETE: {}".format(xlsx_filepath))
     return  # just need to find a way to open the excel doc per the flow chart request
 
+
 def refresh_xlsx_paths():
     """This explicit function is used to iterate through the REPORT_DETAILS.csv and refreshes
     all of the xlsx files needed for the future email build"""
@@ -47,6 +49,10 @@ def refresh_xlsx_paths():
         else:
 
             refresh(xlsx_fp)
+            if not rd.confirm_xlsx_verification(xlsx_fp):
+                print("FALSE VERIFICATION STATUS: {}".format(xlsx_fp))  # TODO: Define verification status
+            else:
+                print("TRUE VERIFICATION STATUS: {}".format(xlsx_fp))
         i += 1  # iterates line by line
 
     return  # just need to find a way to open the excel doc per the flow chart request

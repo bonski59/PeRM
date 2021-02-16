@@ -1,0 +1,13 @@
+SELECT `VendorDrill`.`State_Territory_Code` AS `C_State_Territory_Code`,
+       `VendorDrill`.`d_Market` AS `C_d_Market`,
+       `VendorDrill`.`d_Market_Nbr` AS `C_d_Market_Nbr`,
+       `VendorDrill`.`d_Store` AS `C_d_Store`,
+       `VendorDrill`.`d_Store_Nbr` AS `C_d_Store_Nbr`,
+       `VendorDrill`.`Str_OH_units_wkly` AS `C_Str_OH_units_wkly`,
+       `VendorDrill`.`sales` AS `C_sales`
+FROM `VendorDrill`.`VendorDrill` `VendorDrill`
+GROUP BY `C_State_Territory_Code`,
+         `C_d_Market`,
+         `C_d_Market_Nbr`,
+         `C_d_Store`,
+         `C_d_Store_Nbr`

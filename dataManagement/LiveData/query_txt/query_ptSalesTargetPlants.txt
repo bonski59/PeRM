@@ -1,0 +1,20 @@
+SELECT `VendorDrill`.`SKU_Nbr` AS `C_SKU_Nbr`,
+       `VendorDrill`.`d_Store` AS `C_d_Store`,
+       `VendorDrill`.`d_Store_Nbr` AS `C_d_Store_Nbr`,
+       `VendorDrill`.`sku1` AS `C_sku1`,
+       `VendorDrill`.`Sales_Units` AS `C_Sales_Units`,
+       `VendorDrill`.`Sales_Units_LY` AS `C_Sales_Units_LY`,
+       `VendorDrill`.`Sales_Units_v_LY` AS `C_Sales_Units_v_LY`,
+       `VendorDrill`.`Sales_Units_v_LY_p` AS `C_Sales_Units_v_LY_p`,
+       `VendorDrill`.`Sales__vLY` AS `C_Sales__vLY`,
+       `VendorDrill`.`Sales__v_LY_p` AS `C_Sales__v_LY_p`,
+       `VendorDrill`.`sales` AS `C_sales`,
+       `VendorDrill`.`sales_ly` AS `C_sales_ly`
+FROM `VendorDrill`.`VendorDrill` `VendorDrill`
+WHERE `VendorDrill`.`Class_Nbr` IN ('021-020')
+  AND `VendorDrill`.`Fulfillment Channel` IN ('In Store')
+  AND `VendorDrill`.`Day1_2` >= CAST('2021-01-01' AS DATE)
+GROUP BY `C_SKU_Nbr`,
+         `C_d_Store`,
+         `C_d_Store_Nbr`,
+         `C_sku1`

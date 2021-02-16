@@ -1,0 +1,11 @@
+SELECT `VendorDrill`.`SKU_Nbr` AS `C_SKU_Nbr`,
+       `VendorDrill`.`Short_Week` AS `C_Short_Week`,
+       `VendorDrill`.`d_Store_Nbr` AS `C_d_Store_Nbr`,
+       `VendorDrill`.`Sales_Units` AS `C_Sales_Units`
+FROM `VendorDrill`.`VendorDrill` `VendorDrill`
+WHERE `VendorDrill`.`Fulfillment Channel` IN ('In Store')
+  AND `VendorDrill`.`SKU_Status` IN ('100-ACTIVE')
+  AND `VendorDrill`.`Time_Calculations` IN ('Rolling 4 Week')
+GROUP BY `C_SKU_Nbr`,
+         `C_Short_Week`,
+         `C_d_Store_Nbr`

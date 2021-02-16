@@ -1,0 +1,11 @@
+SELECT `VendorDrill`.`SKU_Nbr` AS `C_SKU_Nbr`,
+       `VendorDrill`.`d_Store` AS `C_d_Store`,
+       `VendorDrill`.`d_Store_Nbr` AS `C_d_Store_Nbr`,
+       `VendorDrill`.`sku1` AS `C_sku1`,
+       `VendorDrill`.`Str_OH_units_dly` AS `C_Str_OH_units_dly`,
+       `VendorDrill`.`Str_OO_units_dly` AS `C_Str_OO_units_dly`
+FROM `VendorDrill`.`VendorDrill` `VendorDrill`
+GROUP BY `C_SKU_Nbr`,
+         `C_d_Store`,
+         `C_d_Store_Nbr`,
+         `C_sku1`
