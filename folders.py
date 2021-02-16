@@ -9,8 +9,10 @@ class Paths:
     reports_xlsx = r"{}\dataManagement\reports_xlsx".format(cwd)
     sales_csv = r"{}\dataManagement\sales_csv".format(cwd)
     dataFolder = r"{}\dataManagement".format(cwd)
-    queryCSV = r"{}\dataManagement\QUERY_DETAIL.csv".format(cwd)
-    reportCSV = r"{}\dataManagement\REPORT_DETAIL.csv".format(cwd)
+    # queryCSV = r"{}\dataManagement\QUERY_DETAIL.csv".format(cwd)  # comment this out when using local ops
+    queryCSV = r"{}\dataManagement\sample-QUERY_DETAIL.csv".format(cwd)  # use this for local ops
+    # reportCSV = r"{}\dataManagement\REPORT_DETAIL.csv".format(cwd)  # comment this out when using local ops
+    reportCSV = r"{}\dataManagement\sample-REPORT_DETAIL.csv".format(cwd)  # use this for local ops
 
 
 

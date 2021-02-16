@@ -1,43 +1,52 @@
 # most of this will be a test environment to verify this works
 
+
 import time
 
+import pandas as pd
+import pywintypes
 import win32com.client as win32
 
+import folders
 
-def refresh(filepath):
-    """this is difficult to test due to my lack of experience in excel.
-     however it should work as intended with the UFP files."""
 
-    """# Start an instance of Excel
-    xlapp = win32com.client.DispatchEx("Excel.Application")
-
-    # Open the workbook in said instance of Excel
-    wb = xlapp.workbooks.open(filepath)
-
-    # Optional, e.g. if you want to debug
-    # xlapp.Visible = True
-
-    # Refresh all data connections.
-    wb.RefreshAll()
-    wb.Save()
-
-    # Quit
-    xlapp.Quit()"""
-    # TODO: Fix this so it doesnt hold up operations
-            # could it be fixed with a foreign  macro in each excel file?
+def refresh(xlsx_filepath):
     Xlsx = win32.DispatchEx('Excel.Application')
     Xlsx.DisplayAlerts = False
     Xlsx.Visible = False
-    book = Xlsx.workbooks.open(filepath)
+    book = Xlsx.workbooks.open(xlsx_filepath)
     # Refresh my two sheets
     # time.sleep(2)
-    book.RefreshAll()
+    try:
+        book.RefreshAll()
+    except pywintypes:
+        print("An error occurred with file {}".format(xlsx_filepath))
     # Xlsx.CalculateUntilAsyncQueriesDone()  # this will actually wait for the excel workbook to finish updating
-    time.sleep(5)
+    time.sleep(5)  # TODO: this is temporary
     book.Save()
     book.Close()
     Xlsx.Quit()
 
+    print("REFRESHED COMPLETE: {}".format(xlsx_filepath))
     return  # just need to find a way to open the excel doc per the flow chart request
 
+def refresh_xlsx_paths():
+    """This explicit function is used to iterate through the REPORT_DETAILS.csv and refreshes
+    all of the xlsx files needed for the future email build"""
+    df = pd.read_csv(folders.Paths.reportCSV, delimiter=',', engine="python")
+    row_count = int(df.shape[0])  # defines num of rows in csv
+    # print(row_count)
+    dict_df = df.to_dict()  # turns csv into dict so we can reference values by headers
+    # print(dict_df)                    # prints dict
+
+    i = 0
+    while i < row_count:
+        xlsx_fp = dict_df['Report_Filepath'][i]
+        if str(xlsx_fp) == 'nan':  # multiple conditions
+            pass
+        else:
+
+            refresh(xlsx_fp)
+        i += 1  # iterates line by line
+
+    return  # just need to find a way to open the excel doc per the flow chart request
