@@ -28,12 +28,13 @@ def refresh(filepath):
             # could it be fixed with a foreign  macro in each excel file?
     Xlsx = win32.DispatchEx('Excel.Application')
     Xlsx.DisplayAlerts = False
-    Xlsx.Visible = True
+    Xlsx.Visible = False
     book = Xlsx.workbooks.open(filepath)
     # Refresh my two sheets
-    time.sleep(2)
+    # time.sleep(2)
     book.RefreshAll()
-    Xlsx.CalculateUntilAsyncQueriesDone()  # this will actually wait for the excel workbook to finish updating
+    # Xlsx.CalculateUntilAsyncQueriesDone()  # this will actually wait for the excel workbook to finish updating
+    time.sleep(5)
     book.Save()
     book.Close()
     Xlsx.Quit()

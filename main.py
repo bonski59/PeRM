@@ -23,33 +23,23 @@ step 4: Email results
     - - Using outlook
     - - - recommend using gmail if outlook is configured with gmail account instead of authentic microsoft account
 """
-import os
-
 import VENDORDRILL_DATA_CONNECTION as VDC
-import folders
 import read_data as rd
-import refresh_excel as rfex
 
-q_arr = rd.read_report_details()
+q_arr = rd.read_report_details()  # get filepath for query txt from query_detail  # pandas read function for report detail csv. use query_detail to find query txt and output csv_sales
 VDC.vendorDrillConnection(q_arr)
 """
 outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
+# refresh all reports using fp in report_detail
 
-report_arr = os.listdir(folders.Paths.reports_xlsx)
-for i in report_arr:
-   rfex.refresh("{}\\{}".format(folders.Paths.reports_xlsx, report_arr[0]))
 """
 takes reports_xlsx file path and iterates through all files and refreshes them.
 this is explicit to xlsx files 
-may encounter error if other filetypes exist in directory
 """
 
-
-
-
-#  email report()
-
+#  pandas read function to read report_detail to pull report fp into email as attachment and pull corresponding Report_Filepath,MAILING_LIST,EMAIL_SUBJECT,EMAIL_BODY
+#  one mailing list per excel list
 
