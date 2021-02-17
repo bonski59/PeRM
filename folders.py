@@ -4,15 +4,20 @@
 import os
 
 class Paths:
-    cwd = os.getcwd()
-    query_txt = r"{}\dataManagement\query_txt".format(cwd)
-    reports_xlsx = r"{}\dataManagement\reports_xlsx".format(cwd)
-    sales_csv = r"{}\dataManagement\sales_csv".format(cwd)
-    dataFolder = r"{}\dataManagement".format(cwd)
-    # queryCSV = r"{}\dataManagement\QUERY_DETAIL.csv".format(cwd)  # comment this out when using local ops
-    queryCSV = r"{}\dataManagement\sample-QUERY_DETAIL.csv".format(cwd)  # use this for local ops
-    # reportCSV = r"{}\dataManagement\REPORT_DETAIL.csv".format(cwd)  # comment this out when using local ops
-    reportCSV = r"{}\dataManagement\sample-REPORT_DETAIL.csv".format(cwd)  # use this for local ops
+    testing = False
+    if not testing:
+        cwd = r"{}\dataManagement\LiveData".format(os.getcwd())
+    else:
+        cwd = r"{}\dataManagement\SampleData".format(os.getcwd())
+
+    query_txt = r"{}\query_txt".format(cwd)
+    reports_xlsx = r"{}\reports_xlsx".format(cwd)
+    sales_csv = r"{}\sales_csv".format(cwd)
+    dataFolder = r"{}".format(cwd)
+
+    queryCSV = r"{}\QUERY_DETAIL.csv".format(cwd)  # use this for local ops
+
+    reportCSV = r"{}\REPORT_DETAIL.csv".format(cwd)  # use this for local ops
 
 
 

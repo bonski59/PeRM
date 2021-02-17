@@ -1,27 +1,19 @@
 import pandas as pd
-
+import os
 import folders
 
 
 def read_report_details():  # reads csv and pulls valid query txt/corresponding csv location files into an array
-    """This Function Works Explicitly for the VDC module"""
-    df = pd.read_csv(folders.Paths.queryCSV, delimiter=',', engine="python")
-    row_count = int(df.shape[0])        # defines num of rows in csv
-    # print(row_count)
-    dict_df = df.to_dict()              # turns csv into dict so we can referance values by headers
-    # print(dict_df)                    # prints dict
-    return_array = []
-    i = 0
-    while i < row_count:
-        query_fp = dict_df['QUERY_TXT_FilePath'][i]
-        csv_fp = dict_df['VDDC_CSV_FilePath'][i]
-        if str(query_fp) == 'nan': # multiple conditions
-            pass
-        else:
-            # print(dict_df['QUERY_TXT'][i])
-            return_array.append([csv_fp, query_fp])
-        i += 1  # iterates line by line
-    return return_array
+    q_arr = []
+    root = folders.Paths.query_txt
+    file_list = os.listdir(root)
+    for fp in file_list:
+        csv_name = fp.replace(".txt", ".csv")
+        csv_file = os.path.join(folders.Paths.sales_csv, csv_name)
+        query_name = fp
+        query_file = os.path.join(root, query_name)
+        q_arr.append([csv_file, query_file])
+    return q_arr
 
 def confirm_xlsx_verification(xlsx_file):  # Explicit to files with a 'VERIFICATION' sheet_name
     fp = xlsx_file
