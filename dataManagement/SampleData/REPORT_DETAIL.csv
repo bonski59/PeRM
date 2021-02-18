@@ -1,0 +1,8 @@
+﻿INDEX_ID,REPORT_NAME,STANDARD_REPORT_NAME,Report_Filepath,MAILING_LIST,EMAIL_SUBJECT,EMAIL_BODY,MAIL_FREQUENCY,REPORT_STATUS,NOTES
+4,Category Dashboard,CATEGORY_DASHBOARD,D:\git\PeRM\PeRM\dataManagement\SampleData\testing_1_2.txt,blake.ufp@gmail.com,Category Dashboard,,Weekly (tues),ACTIVE,
+13,396 Forecast,396_FORECASTING,D:\git\PeRM\PeRM\dataManagement\SampleData\testing_1_2.txt,blake.ufp@gmail.com,396 Weekly Sales Forecast,,Weekly (tues),ACTIVE,
+16,Short Lumber Program Performance,SHORTLUMBER_PROGRAM_PERFORMANCE,D:\git\PeRM\PeRM\dataManagement\SampleData\testing_1_2.txt,blake.ufp@gmail.com,Short Lumber Programs - Weekly Sales,,Weekly (tues),ACTIVE,
+10,KPI Categories,KPI_REPORT,D:\git\PeRM\PeRM\dataManagement\SampleData\testing_1_2.txt,blake.ufp@gmail.com,KPI Categories - Home Depot Weekly Sales,"All,See attached for the latest KPI weekly sales report. ",Weekly (tues),ACTIVE,
+1,Northwest Paint-weekly,NORTHWEST_PAINT,D:\git\PeRM\PeRM\dataManagement\SampleData\testing_1_2.txt,blake.ufp@gmail.com,UFP - NorthWest Paint - Weekly Sales,,Weekly (tues),ACTIVE,
+
+
