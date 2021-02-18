@@ -23,21 +23,20 @@ step 4: Email results
     - - Using outlook
     - - - recommend using gmail if outlook is configured with gmail account instead of authentic microsoft account
 """
+
 import VENDORDRILL_DATA_CONNECTION as VDC
 import read_data as rd
+import refresh_excel as re
 
-q_arr = rd.read_report_details()  # get filepath for query txt from query_detail  # pandas read function for report detail csv. use query_detail to find query txt and output csv_sales
+# step 1: initiate VDC and query HD server
+q_arr = rd.read_report_details()
 VDC.vendorDrillConnection(q_arr)
 """
 outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
-
-"""import refresh_excel as re
-
-re.refresh_xlsx_paths()"""
-
+re.refresh_xlsx_paths()  # step 2: Refresh Data # TODO: make sure this works for the new xl data
 """
 takes reports_xlsx file path and iterates through all files and refreshes them.
 this is explicit to xlsx files 

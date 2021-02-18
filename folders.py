@@ -1,7 +1,14 @@
-# this shouldnt have any functions in it
+# this shouldn't have any functions in it
 # only classes
 
 import os
+
+"""
+This a new technique I've been using. basically any important filepaths that we need to use 
+are referenced here. Using this module as an import in most of the other modules inside PeRM 
+has proven usefull for both testing and operational use. It is a quick an easy means to switch 
+filepaths by just changing the "testing = "bool"" to whatever the situation is. we have yet to  
+"""
 
 class Paths:
     testing = True
