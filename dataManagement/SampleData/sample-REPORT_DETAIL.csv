@@ -1,8 +1,0 @@
-﻿INDEX_ID,REPORT_NAME,STANDARD_REPORT_NAME,Report_Filepath,MAILING_LIST,EMAIL_SUBJECT,EMAIL_BODY,MAIL_FREQUENCY,REPORT_STATUS,NOTES
-4,Category Dashboard,CATEGORY_DASHBOARD,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_1B.xlsx,"ALYSSA.LETT@ufpi.com,BMAYO@ufpi.com,DBEAULIEU@ufpi.com,DJAMES@ufpi.com,DSTILL@ufpi.com,DVALOIS@ufpi.com,JFINK@ufpi.com,MBARNHARDT@ufpi.com,NCISNEROS@ufpi.com,SCONLIN@ufpi.com",Category Dashboard,,Weekly (tues),ACTIVE,
-13,396 Forecast,396_FORECASTING,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_2B.xlsx,"dpritchard@ufpi.com,rhoffman@ufpi.com",396 Weekly Sales Forecast,,Weekly (tues),ACTIVE,
-16,Short Lumber Program Performance,SHORTLUMBER_PROGRAM_PERFORMANCE,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_3C.xlsx,DBEAULIEU@ufpi.com,Short Lumber Programs - Weekly Sales,,Weekly (tues),ACTIVE,
-10,KPI Categories,KPI_REPORT,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_4D.xlsx,"ALYSSA.LETT@ufpi.com,CCAMFFERMAN@ufpi.com,dbeaulieu@ufpi.com,DBENNETT@ufpi.com,DMILANOWSKI@ufpi.com,JDEBOER@ufpi.com,JFINK@ufpi.com",KPI Categories - Home Depot Weekly Sales,"All,See attached for the latest KPI weekly sales report. ",Weekly (tues),ACTIVE,
-1,Northwest Paint-weekly,NORTHWEST_PAINT,D:\git\PeRM\PeRM\dataManagement\reports_xlsx\report_5E.xlsx,matt@northwestpaint.com,UFP - NorthWest Paint - Weekly Sales,,Weekly (tues),ACTIVE,
-
-

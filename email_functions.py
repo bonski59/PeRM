@@ -1,6 +1,7 @@
 # this module focuses on using outlook/gmail(for testing) to build email attachments with required content and send
 # them to the required recipients
 
+import os
 import os.path
 import smtplib
 from email import encoders
@@ -8,13 +9,50 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+import pandas as pd
 
-# noinspection PyBroadException
+import folders
+
+""" email credentials will need to be changed """
+if folders.Paths.testing:
+    email_credentials = {
+        'username': 'charliekil0159@gmail.com',
+        'password': 'ck1590!@',
+        'sender': 'charliekil0159@gmail.com',
+        'smtp_server': 'smtp.gmail.com',
+        'smtp_port': 587
+    }
+else:
+    # blake's credentials for dummy account
+    email_credentials = {
+            'username': '',
+            'password': '',
+            'sender': '',
+            'smtp_server': '',
+            'smtp_port': ''         # int
+        }
+
+"""
+Bread and Butter email function
+This will be used in the later loop when iterating through REPORT_DETAILS.csv 
+
+sends single attachment 
+uses single sender 
+multiple recipients 
+subject and message are simple strings 
+
+    I'll be honest, a lot of how this function is built is foreign to me 
+    therefore any troubleshooting/changes will have to be done in a debugging capacity separate of 
+    important files and or important email login credentials. I can't explain why but I would feel 
+    safer doing it that way.  
+        -CK
+"""
 def send_email(email_recipient,
                email_subject,
                email_message,
                attachment_location=''):
-    email_sender = 'charliekil0159@gmail.com'
+
+    email_sender = email_credentials['username']
 
     msg = MIMEMultipart()
     msg['From'] = email_sender
@@ -34,10 +72,10 @@ def send_email(email_recipient,
         msg.attach(part)
 
     try:
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server = smtplib.SMTP(email_credentials['smtp_server'], email_credentials['smtp_port'])
         server.ehlo()
         server.starttls()
-        server.login('charliekil0159@gmail.com', 'ck1590!@')
+        server.login(email_credentials['username'], email_credentials['password'])
         text = msg.as_string()
         server.sendmail(email_sender, email_recipient, text)
         server.quit()
@@ -46,6 +84,49 @@ def send_email(email_recipient,
     return True
 
 
-send_email('corbinkelly15@gmail.com',
-           'Excel Email',
-           'I sent this with python.... this is a burner account', r'D:\git\PeRM\PeRM\Book1.xlsx')
+def email_everyone():                   # explict function that will be imported to main.py
+    """
+    read REPORT_DETAIL.csv
+    for every line compose an email
+    TODO: Build QA function before send_email and catch bad info for admin_report
+            # does csv content exist i.e.(message, subject, recipient, sender, etc)
+            # if false data: admin_report(bad_data) "the following was flagged as bad data"
+            # if true data: send_email
+            TODO: find out what bad_data qualifies to reroute to admin
+    input variables into a dict inside for loop
+    inject variable into "send email" function
+    send the email
+    """
+
+    csv_rep = folders.Paths.reportCSV   # 1: read report, report file must be a static location, otherwise we will need to inject a function property at its definition
+    df = pd.read_csv(csv_rep)           # makes pandas dataframe out of csv
+    loop_length = int(df.shape[0]) - 1  # calculates loop length by number of lines in csv
+    # print(df['MAILING_LIST'][0])      # test what df looks like
+    while loop_length >= 0:             # 2: Build loop
+
+        if folders.Paths.testing:       # testing safety net, check folders.py if not testing and confirm class variable
+                                        # compose dict for functional reference later
+            email_content = {'recipients_arr': df['MAILING_LIST'][loop_length], 'subject': df['EMAIL_SUBJECT'][loop_length],
+                             'message': "For Purely Professional Testing Purposes",
+                             'attachment_fp_arr': df['Report_Filepath'][loop_length]}
+        else:
+                                        # compose dict for functional reference later
+            email_content = {'recipients_arr': df['MAILING_LIST'][loop_length],
+                             'subject': df['EMAIL_SUBJECT'][loop_length],
+                             'message': df['EMAIL_BODY'][loop_length],
+                             'attachment_fp_arr': df['Report_Filepath'][loop_length]}
+
+        # print(str(email_content))     # testing what csv as dict looks like as string
+                                        # execute send_email function with dict variables
+        send_email(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr'])
+        loop_length -= 1                # subtract iterable "loop_length" so that the "while" loop will end
+    return                              # exit function
+
+# email_everyone() # testing purposes only
+
+
+def admin_report():
+    """
+    collect positive and negative data from REPORT_DETAILS.csv
+    """
+    return

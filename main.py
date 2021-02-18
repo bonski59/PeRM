@@ -23,26 +23,39 @@ step 4: Email results
     - - Using outlook
     - - - recommend using gmail if outlook is configured with gmail account instead of authentic microsoft account
 """
-import VENDORDRILL_DATA_CONNECTION as VDC
-import read_data as rd
 
-q_arr = rd.read_report_details()  # get filepath for query txt from query_detail  # pandas read function for report detail csv. use query_detail to find query txt and output csv_sales
+import VENDORDRILL_DATA_CONNECTION as VDC
+import email_functions as ef
+import read_data as rd
+import refresh_excel as re
+
+"""
+VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
+VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
+VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
+VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
+VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
+VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
+"""
+
+q_arr = rd.read_report_details()    # step 1: initiate VDC and query HD server
 VDC.vendorDrillConnection(q_arr)
 """
 outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
-
-"""import refresh_excel as re
-
-re.refresh_xlsx_paths()"""
-
+re.refresh_xlsx_paths()             # step 2: Refresh Data # TODO: make sure this works for the new xl data
+                                    # includes step 3 (more efficient)
+                                    # step 3: Verify XL data meets metadata criteria
 """
 takes reports_xlsx file path and iterates through all files and refreshes them.
 this is explicit to xlsx files 
+
+also verifies xl paths that have met a given criteria 
 """
 
-#  pandas read function to read report_detail to pull report fp into email as attachment and pull corresponding Report_Filepath,MAILING_LIST,EMAIL_SUBJECT,EMAIL_BODY
-#  one mailing list per excel list
-
+ef.email_everyone()                 # step 3: Email everyone
+"""
+Takes REPORT_DETAIL.csv and finds required items for email and sends content to desired email recipients 
+"""
