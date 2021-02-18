@@ -34,9 +34,9 @@ this satisfies Step 1
 """
 
 
-import refresh_excel as re
+"""import refresh_excel as re
 
-re.refresh_xlsx_paths()
+re.refresh_xlsx_paths()"""
 
 """
 takes reports_xlsx file path and iterates through all files and refreshes them.

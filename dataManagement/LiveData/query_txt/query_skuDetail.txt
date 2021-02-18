@@ -1,13 +1,17 @@
-SELECT `VendorDrill`.`State_Territory_Code` AS `C_State_Territory_Code`,
-       `VendorDrill`.`d_Market` AS `C_d_Market`,
-       `VendorDrill`.`d_Market_Nbr` AS `C_d_Market_Nbr`,
-       `VendorDrill`.`d_Store` AS `C_d_Store`,
-       `VendorDrill`.`d_Store_Nbr` AS `C_d_Store_Nbr`,
-       `VendorDrill`.`Str_OH_units_wkly` AS `C_Str_OH_units_wkly`,
-       `VendorDrill`.`sales` AS `C_sales`
+SELECT `VendorDrill`.`Class_Name` AS `C_Class_Name`,
+       `VendorDrill`.`Model_Number` AS `C_Model_Number`,
+       `VendorDrill`.`SKU_Name` AS `C_SKU_Name`,
+       `VendorDrill`.`SKU_Nbr` AS `C_SKU_Nbr`,
+       `VendorDrill`.`Sub_Class_2` AS `C_Sub_Class_2`,
+       `VendorDrill`.`Sub_Class_Nbr` AS `C_Sub_Class_Nbr`,
+       `VendorDrill`.`dept_2` AS `C_dept_2`,
+       `VendorDrill`.`Sales_Units` AS `C_Sales_Units`,
+       `VendorDrill`.`Str_OH_units_wkly` AS `C_Str_OH_units_wkly`
 FROM `VendorDrill`.`VendorDrill` `VendorDrill`
-GROUP BY `C_State_Territory_Code`,
-         `C_d_Market`,
-         `C_d_Market_Nbr`,
-         `C_d_Store`,
-         `C_d_Store_Nbr`
+GROUP BY `C_Class_Name`,
+         `C_Model_Number`,
+         `C_SKU_Name`,
+         `C_SKU_Nbr`,
+         `C_Sub_Class_2`,
+         `C_Sub_Class_Nbr`,
+         `C_dept_2`
