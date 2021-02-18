@@ -25,6 +25,7 @@ step 4: Email results
 """
 
 import VENDORDRILL_DATA_CONNECTION as VDC
+import email_functions as ef
 import read_data as rd
 import refresh_excel as re
 
@@ -36,12 +37,17 @@ outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
-re.refresh_xlsx_paths()  # step 2: Refresh Data # TODO: make sure this works for the new xl data
+re.refresh_xlsx_paths()     # step 2: Refresh Data # TODO: make sure this works for the new xl data
+                            # includes step 3 (more efficient)
+                            # step 3: Verify XL data meets metadata criteria
 """
 takes reports_xlsx file path and iterates through all files and refreshes them.
 this is explicit to xlsx files 
+
+also verifies xl paths that have met a given criteria 
 """
 
-#  pandas read function to read report_detail to pull report fp into email as attachment and pull corresponding Report_Filepath,MAILING_LIST,EMAIL_SUBJECT,EMAIL_BODY
-#  one mailing list per excel list
-
+ef.email_everyone()         # step 3: Email everyone
+"""
+Takes REPORT_DETAIL.csv and finds required items for email and sends content to desired email recipients 
+"""

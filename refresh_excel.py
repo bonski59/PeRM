@@ -35,16 +35,18 @@ def refresh(xlsx_filepath):
 def refresh_xlsx_paths():
     """This explicit function is used to iterate through the REPORT_DETAILS.csv and refreshes
     all of the xlsx files needed for the future email build"""
-    df = pd.read_csv(folders.Paths.reportCSV, delimiter=',', engine="python")
-    row_count = int(df.shape[0])  # defines num of rows in csv
+    df = pd.read_csv(folders.Paths.reportCSV,
+                     delimiter=',',
+                     engine="python")
+    row_count = int(df.shape[0])        # defines num of rows in csv
     # print(row_count)
-    dict_df = df.to_dict()  # turns csv into dict so we can reference values by headers
+    dict_df = df.to_dict()              # turns csv into dict so we can reference values by headers
     # print(dict_df)                    # prints dict
 
     i = 0
     while i < row_count:
         xlsx_fp = dict_df['Report_Filepath'][i]
-        if str(xlsx_fp) == 'nan':  # multiple conditions
+        if str(xlsx_fp) == 'nan':       # multiple conditions
             pass
         else:
 
