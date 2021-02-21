@@ -17,8 +17,15 @@ def read_report_details():  # reads csv and pulls valid query txt/corresponding 
 
 def confirm_xlsx_verification(xlsx_file):  # Explicit to files with a 'VERIFICATION' sheet_name
     fp = xlsx_file
-    df = pd.read_excel(fp, sheet_name='VERIFICATION', engine='openpyxl')
-    df = str(df)
+    try:
+        df = pd.read_excel(fp, sheet_name='verification', engine='openpyxl')
+        df = str(df.iloc[0])
+        df = df[:6]
+    except UserWarning:
+        print("Flagged during the following:")
+        print(xlsx_file)
+        return
+    # print(df)
     if "True" in df:
         return True
     else:
