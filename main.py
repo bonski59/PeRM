@@ -46,6 +46,8 @@ this satisfies Step 1
 """
 
 re.refresh_xlsx_paths()             # step 2: Refresh Data # TODO: make sure this works for the new xl data
+                                                            # referential data only works on Blake's computer
+                                                            # timing the refresh function and applying its duration wont work because it will flag an excel error
                                     # includes step 3 (more efficient)
                                     # step 3: Verify XL data meets metadata criteria
 """
