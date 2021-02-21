@@ -25,11 +25,11 @@ if folders.Paths.testing:
 else:
     # blake's credentials for dummy account
     email_credentials = {
-            'username': '',
-            'password': '',
-            'sender': '',
-            'smtp_server': '',
-            'smtp_port': ''         # int
+            'username': 'autonotification.ufpi@gmail.com',
+            'password': 'as;dlfkj28dLDF',
+            'sender': 'autonotification.ufpi@gmail.com',
+            'smtp_server': 'smtp.gmail.com',
+            'smtp_port': 587
         }
 
 """
@@ -47,6 +47,7 @@ subject and message are simple strings
     safer doing it that way.  
         -CK
 """
+
 def send_email(email_recipient,
                email_subject,
                email_message,
@@ -71,16 +72,17 @@ def send_email(email_recipient,
                         "attachment; filename= %s" % filename)
         msg.attach(part)
 
-    try:
-        server = smtplib.SMTP(email_credentials['smtp_server'], email_credentials['smtp_port'])
-        server.ehlo()
-        server.starttls()
-        server.login(email_credentials['username'], email_credentials['password'])
-        text = msg.as_string()
-        server.sendmail(email_sender, email_recipient, text)
-        server.quit()
-    except:
-        print("SMPT server connection error")
+
+    server = smtplib.SMTP(email_credentials['smtp_server'], email_credentials['smtp_port'])
+    server.ehlo()
+    server.starttls()
+    server.login(email_credentials['username'], email_credentials['password'])
+    text = msg.as_string()
+    #server.send_message(MIMEText(text), email_sender, email_recipient) # changed from sendmail
+    server.sendmail(email_sender, email_recipient, text)  # changed from sendmail
+    server.quit()
+    """except:
+        print("SMPT server connection error")"""
     return True
 
 
@@ -103,26 +105,43 @@ def email_everyone():                   # explict function that will be imported
     loop_length = int(df.shape[0]) - 1  # calculates loop length by number of lines in csv
     # print(df['MAILING_LIST'][0])      # test what df looks like
     while loop_length >= 0:             # 2: Build loop
-
-        if folders.Paths.testing:       # testing safety net, check folders.py if not testing and confirm class variable
-                                        # compose dict for functional reference later
-            email_content = {'recipients_arr': df['MAILING_LIST'][loop_length], 'subject': df['EMAIL_SUBJECT'][loop_length],
-                             'message': "For Purely Professional Testing Purposes",
-                             'attachment_fp_arr': df['Report_Filepath'][loop_length]}
+        if not df['Verification_Status'][loop_length] or df['REPORT_STATUS'][loop_length] != 'ACTIVE':
+            #print(df['Verification_Status'][loop_length], df['REPORT_STATUS'][loop_length])
+            loop_length -= 1
+            pass
         else:
-                                        # compose dict for functional reference later
-            email_content = {'recipients_arr': df['MAILING_LIST'][loop_length],
-                             'subject': df['EMAIL_SUBJECT'][loop_length],
-                             'message': df['EMAIL_BODY'][loop_length],
-                             'attachment_fp_arr': df['Report_Filepath'][loop_length]}
+            #print("the good stuff {} and {}".format(df['Verification_Status'][loop_length], df['REPORT_STATUS'][loop_length]))
+            #loop_length -= 1
 
-        # print(str(email_content))     # testing what csv as dict looks like as string
+            if folders.Paths.testing:       # testing safety net, check folders.py if not testing and confirm class variable
+                                             # compose dict for functional reference later
+                email_content = {'recipients_arr': df['MAILING_LIST'][loop_length], 'subject': df['EMAIL_SUBJECT'][loop_length],
+                                 'message': "For Purely Professional Testing Purposes",
+                                 'attachment_fp_arr': df['Report_Filepath'][loop_length]}
+            else:
+                                            # compose dict for functional reference later
+                email_content = {'recipients_arr': "blake.ufp@gmail.com,corbinkelly15@gmail.com",
+                                 'subject': str(df['EMAIL_SUBJECT'][loop_length]),
+                                 'message': str(df['EMAIL_BODY'][loop_length]),
+                                 'attachment_fp_arr': df['Report_Filepath'][loop_length]}
+
+            # print(str(email_content))     # testing what csv as dict looks like as string
                                         # execute send_email function with dict variables
-        send_email(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr'])
-        loop_length -= 1                # subtract iterable "loop_length" so that the "while" loop will end
+
+            if email_content['message'] == 'nan':
+                email_content['message'] = 'This is an Automatic Notification from Blakeypoo '
+
+
+            print("SENDING : " +  email_content['subject'])
+            send_email(email_content['recipients_arr'].split(','),
+                       email_content['subject'],
+                       email_content['message'],
+                       email_content['attachment_fp_arr'])
+            print("SENT \n {} \n {} \n {} \n {}".format(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr']))
+            loop_length -= 1                # subtract iterable "loop_length" so that the "while" loop will end
     return                              # exit function
 
-# email_everyone() # testing purposes only
+email_everyone() # testing purposes only
 
 
 def admin_report():
