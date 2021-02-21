@@ -27,7 +27,6 @@ step 4: Email results
 import VENDORDRILL_DATA_CONNECTION as VDC
 import email_functions as ef
 import read_data as rd
-import refresh_excel as re
 
 """
 VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
@@ -45,7 +44,9 @@ outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
-re.refresh_xlsx_paths()             # step 2: Refresh Data # TODO: make sure this works for the new xl data
+# re.refresh_xlsx_paths()             # step 2: Refresh Data # TODO: make sure this works for the new xl data
+                                                            # referential data only works on Blake's computer
+                                                            # timing the refresh function and applying its duration wont work because it will flag an excel error
                                     # includes step 3 (more efficient)
                                     # step 3: Verify XL data meets metadata criteria
 """
