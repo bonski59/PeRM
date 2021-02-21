@@ -15,14 +15,12 @@ def refresh(xlsx_filepath):
     Xlsx.DisplayAlerts = False
     Xlsx.Visible = False
     book = Xlsx.workbooks.open(xlsx_filepath)
-    # Refresh my two sheets
-    # time.sleep(2)
+
     try:
         book.RefreshAll()
     except pywintypes:
         print("An error occurred with file {}".format(xlsx_filepath))
-    # Xlsx.CalculateUntilAsyncQueriesDone()  # this will actually wait for the excel workbook to finish updating
-    # time.sleep(1)  # TODO: this is temporary
+
     book.Save()
     book.Close()
     Xlsx.Quit()
@@ -39,42 +37,40 @@ def refresh_xlsx_paths():
     df = pd.read_csv(folders.Paths.reportCSV, index_col="INDEX_ID")
     df_status = df['Report_Filepath'].loc[df['REPORT_STATUS'] == 'ACTIVE']  # Dependant on correct string format
     # print(df_status.count())
-    print(df_status)
+    # print(df_status)
     status_true = []
     status_false = []
     for i in df_status:
-        # refresh(i)
+        refresh(i)
         if not rd.confirm_xlsx_verification(i):
             status_false.append(i)
             # update pandas verification column to False .iloc "file"
 
         else:
             status_true.append(i)
-
-    df_false = df['Verification_Status'].loc[df['Report_Filepath'].isin(status_false)]
+    print("Output Verified Files: \n {} \n The following have been verified".format(status_true))
     df_true = df['Verification_Status'].loc[df['Report_Filepath'].isin(status_true)]
 
-    upd_false = pd.Series(0, name='Verification_Status')
-    df.update(upd_false)
-    print()
-    input()
+    for col in df.columns:
+        df['Verification_Status'].values[:] = 0
+
+    # print(df['Verification_Status'])
     true_val = []
     true_index = df_true.index.tolist()
     for i in true_index:
         true_val.append(1)
     upd = pd.Series(true_val, name='Verification_Status', index=true_index)
     df.update(upd)
-    print(df['Verification_Status'])
+    # print(df['Verification_Status'])
 
 
     # print(df_true)
     df.to_csv(folders.Paths.reportCSV)
-
     return
 # testing
-refresh_xlsx_paths()
-
+# refresh_xlsx_paths()
 # testing
+
 def time_refresh_xlsx_files():
     import os
     # fp = r"C:\Users\us160212\Documents\GitHub\PeRM\dataManagement\LiveData\reports_xlsx\New SKU Sales.xlsx"
@@ -99,4 +95,4 @@ def time_refresh_xlsx_files():
     return
 # testing
 # time_refresh_xlsx_files()
-
+# testing
