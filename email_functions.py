@@ -48,6 +48,7 @@ subject and message are simple strings
         -CK
 """
 
+
 def send_email(email_recipient,
                email_subject,
                email_message,
@@ -63,6 +64,7 @@ def send_email(email_recipient,
     msg.attach(MIMEText(email_message, 'plain'))
 
     if attachment_location != '':
+
         filename = os.path.basename(attachment_location)
         attachment = open(attachment_location, "rb")
         part = MIMEBase('application', 'octet-stream')
@@ -71,6 +73,7 @@ def send_email(email_recipient,
         part.add_header('Content-Disposition',
                         "attachment; filename= %s" % filename)
         msg.attach(part)
+
 
 
     server = smtplib.SMTP(email_credentials['smtp_server'], email_credentials['smtp_port'])
@@ -120,7 +123,7 @@ def email_everyone():                   # explict function that will be imported
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
             else:
                                             # compose dict for functional reference later
-                email_content = {'recipients_arr': "blake.ufp@gmail.com,corbinkelly15@gmail.com",
+                email_content = {'recipients_arr': "blake.ufp@gmail.com,corbinkelly15@gmail.com",  # TODO change to df['MAILING_LIST'][loop_length] when live
                                  'subject': str(df['EMAIL_SUBJECT'][loop_length]),
                                  'message': str(df['EMAIL_BODY'][loop_length]),
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
@@ -131,17 +134,22 @@ def email_everyone():                   # explict function that will be imported
             if email_content['message'] == 'nan':
                 email_content['message'] = 'This is an Automatic Notification from Blakeypoo '
 
-
+            rx_list = email_content['recipients_arr'].split(',')
             print("SENDING : " +  email_content['subject'])
-            send_email(email_content['recipients_arr'].split(','),
-                       email_content['subject'],
-                       email_content['message'],
-                       email_content['attachment_fp_arr'])
+            print("RECIPIENTS: {}".format(rx_list))
+
+            for i in rx_list:
+                send_email(i,
+                           email_content['subject'],
+                           email_content['message'],
+                           email_content['attachment_fp_arr'])
+
+
             print("SENT \n {} \n {} \n {} \n {}".format(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr']))
             loop_length -= 1                # subtract iterable "loop_length" so that the "while" loop will end
     return                              # exit function
 
-email_everyone() # testing purposes only
+# email_everyone() # testing purposes only
 
 
 def admin_report():

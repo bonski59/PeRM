@@ -6,6 +6,7 @@ def vendorDrillConnection(query_arr):       # designed to ingest array like "[[*
         output_filepath = i[0]              # this is the csv value from query_arr[i][0]
 
         result_set = pd.read_sql(open(i[1]).read(), pyodbc.connect("DSN=VENDORDRILL_DATA_CONNECTION", autoCommit=True))
+        print("txt query sent to dbc: {}".format(i[1]))
         """ 
         I did not write this part, it was received from Home Depot analysts 
         From what I can tell the above variable sets a pandas data frame to "result_set" from reading a SQL 
@@ -15,6 +16,7 @@ def vendorDrillConnection(query_arr):       # designed to ingest array like "[[*
         """
 
         result_set.to_csv(path_or_buf=output_filepath, index=False)
+        print("csv created : {}".format(output_filepath))
         """
         The variable above changes the output pandas data frame "result_set" to a csv and sends it to the csv filepath defined in "query_arr[i][0]"
         -CK
