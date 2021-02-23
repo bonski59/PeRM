@@ -1,6 +1,9 @@
-import pandas as pd
 import os
+
+import pandas as pd
+
 import folders
+from admin import admin_print
 
 
 def read_report_details():  # reads csv and pulls valid query txt/corresponding csv location files into an array
@@ -22,8 +25,8 @@ def confirm_xlsx_verification(xlsx_file):  # Explicit to files with a 'VERIFICAT
         df = str(df.iloc[0])
         df = df[:6]
     except UserWarning:
-        print("Flagged during the following:")
-        print(xlsx_file)
+        admin_print("Flagged during the following File:  {} ".format(xlsx_file))
+
         return
     # print(df)
     if "True" in df:
@@ -31,11 +34,4 @@ def confirm_xlsx_verification(xlsx_file):  # Explicit to files with a 'VERIFICAT
     else:
         return False
 
-def read_xlxs(xlsx_file):  # Used for Testing
-    fp = xlsx_file
-    df = pd.read_excel(fp, sheet_name='Sheet1', engine='openpyxl')
-    df = str(df)
-    print(df)
 
-# print(read_report_details())
-# query_list = read_report()

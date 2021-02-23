@@ -1,9 +1,9 @@
 # this module focuses on using outlook/gmail(for testing) to build email attachments with required content and send
 # them to the required recipients
-
 import os
 import os.path
 import smtplib
+from datetime import datetime
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -12,6 +12,7 @@ from email.mime.text import MIMEText
 import pandas as pd
 
 import folders
+from admin import admin_print
 
 """ email credentials will need to be changed """
 if folders.Paths.testing:
@@ -24,6 +25,7 @@ if folders.Paths.testing:
     }
 else:
     # blake's credentials for dummy account
+    # maybe make a csv with this info so that it can be edited by an Access form?
     email_credentials = {
             'username': 'autonotification.ufpi@gmail.com',
             'password': 'as;dlfkj28dLDF',
@@ -84,8 +86,7 @@ def send_email(email_recipient,
     #server.send_message(MIMEText(text), email_sender, email_recipient) # changed from sendmail
     server.sendmail(email_sender, email_recipient, text)  # changed from sendmail
     server.quit()
-    """except:
-        print("SMPT server connection error")"""
+
     return True
 
 
@@ -106,15 +107,12 @@ def email_everyone():                   # explict function that will be imported
     csv_rep = folders.Paths.reportCSV   # 1: read report, report file must be a static location, otherwise we will need to inject a function property at its definition
     df = pd.read_csv(csv_rep)           # makes pandas dataframe out of csv
     loop_length = int(df.shape[0]) - 1  # calculates loop length by number of lines in csv
-    # print(df['MAILING_LIST'][0])      # test what df looks like
     while loop_length >= 0:             # 2: Build loop
         if not df['Verification_Status'][loop_length] or df['REPORT_STATUS'][loop_length] != 'ACTIVE':
-            #print(df['Verification_Status'][loop_length], df['REPORT_STATUS'][loop_length])
+            admin_print("**NOT VERIFIED OR NOT ACTIVE : {}**".format(df['Report_Filepath'][loop_length]))
             loop_length -= 1
             pass
         else:
-            #print("the good stuff {} and {}".format(df['Verification_Status'][loop_length], df['REPORT_STATUS'][loop_length]))
-            #loop_length -= 1
 
             if folders.Paths.testing:       # testing safety net, check folders.py if not testing and confirm class variable
                                              # compose dict for functional reference later
@@ -123,20 +121,18 @@ def email_everyone():                   # explict function that will be imported
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
             else:
                                             # compose dict for functional reference later
-                email_content = {'recipients_arr': df['MAILING_LIST'][loop_length],  # TODO change to df['MAILING_LIST'][loop_length] when live - "blake.ufp@gmail.com,corbinkelly15@gmail.com"
+                email_content = {'recipients_arr': df['MAILING_LIST'][loop_length],  #  change to df['MAILING_LIST'][loop_length] when live - "blake.ufp@gmail.com,corbinkelly15@gmail.com"
                                  'subject': str(df['EMAIL_SUBJECT'][loop_length]),
                                  'message': str(df['EMAIL_BODY'][loop_length]),
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
 
-            # print(str(email_content))     # testing what csv as dict looks like as string
-                                        # execute send_email function with dict variables
 
             if email_content['message'] == 'nan':
-                email_content['message'] = 'This is an Automatic Notification from Blakeypoo '
+                email_content['message'] = 'This is an Automatic Notification from the UFPI Analyst Team'
 
             rx_list = email_content['recipients_arr'].split(',')
-            print("SENDING : " +  email_content['subject'])
-            print("RECIPIENTS: {}".format(rx_list))
+            admin_print("SENDING : " +  email_content['subject'])
+            admin_print("RECIPIENTS: {}".format(rx_list))
 
             for i in rx_list:
                 send_email(i,
@@ -145,15 +141,20 @@ def email_everyone():                   # explict function that will be imported
                            email_content['attachment_fp_arr'])
 
 
-            print("SENT \n {} \n {} \n {} \n {}".format(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr']))
+            admin_print("SENT \n {} \n {} \n {} \n {}".format(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr']))
             loop_length -= 1                # subtract iterable "loop_length" so that the "while" loop will end
     return                              # exit function
-
-# email_everyone() # testing purposes only
-
 
 def admin_report():
     """
     collect positive and negative data from REPORT_DETAILS.csv
+    send info to admin account
     """
+    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    adm_rep = r"{}\admin_report.txt".format(folders.Paths.dataFolder)
+    admin_email = email_credentials['username']
+    send_email(admin_email,
+               "PeRM: ADMIN REPORT {}".format(now),
+               "See Attached",
+               adm_rep)
     return
