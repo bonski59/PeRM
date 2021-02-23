@@ -1,13 +1,10 @@
-# most of this will be a test environment to verify this works
-
-
-import time
 import pandas as pd
 import pywintypes
 import win32com.client as win32
 
 import folders
 import read_data as rd
+from admin import admin_print
 
 
 def refresh(xlsx_filepath):
@@ -19,16 +16,14 @@ def refresh(xlsx_filepath):
     try:
         book.RefreshAll()
     except pywintypes:
-        print("An error occurred with file {}".format(xlsx_filepath))
+        admin_print("An error occurred with file {}".format(xlsx_filepath))
 
     book.Save()
     book.Close()
     Xlsx.Quit()
 
-    print("REFRESHED COMPLETE: {}".format(xlsx_filepath))
+    admin_print("REFRESHED COMPLETE: {}".format(xlsx_filepath))
     return  # just need to find a way to open the excel doc per the flow chart request
-
-
 
 
 def refresh_xlsx_paths():
@@ -48,7 +43,7 @@ def refresh_xlsx_paths():
 
         else:
             status_true.append(i)
-    print("Output Verified Files: \n {} \n The following have been verified".format(status_true))
+    admin_print("Output Verified Files: \n {} \n The following have been verified".format(status_true))
     df_true = df['Verification_Status'].loc[df['Report_Filepath'].isin(status_true)]
 
     for col in df.columns:
@@ -67,32 +62,3 @@ def refresh_xlsx_paths():
     # print(df_true)
     df.to_csv(folders.Paths.reportCSV)
     return
-# testing
-# refresh_xlsx_paths()
-# testing
-
-def time_refresh_xlsx_files():
-    import os
-    # fp = r"C:\Users\us160212\Documents\GitHub\PeRM\dataManagement\LiveData\reports_xlsx\New SKU Sales.xlsx"
-    clock = time.time()
-    """for root, dirs, files in os.walk(folders.Paths.reports_xlsx):
-
-        for f in files:"""
-    df = pd.read_csv(folders.Paths.reportCSV)
-    df = df['Report_Filepath'].loc[df['REPORT_STATUS'] == 'ACTIVE']  # Dependant on correct string format
-    # print(df)
-    for i in df:
-        print(i)
-        x = time.time()
-        refresh(i)
-        y = time.time()
-        t = y - x
-        print("{} :Time elapsed to refresh {}".format(t, i))
-    now = time.time()
-    total_time = now - clock
-    print("{} : Total time elapsed for entire .\\reports_xlsx folder".format(total_time))
-    print("{} : average Time per file".format(total_time / len(os.listdir(folders.Paths.reports_xlsx))))
-    return
-# testing
-# time_refresh_xlsx_files()
-# testing

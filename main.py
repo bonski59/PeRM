@@ -24,10 +24,16 @@ step 4: Email results
     - - - recommend using gmail if outlook is configured with gmail account instead of authentic microsoft account
 """
 
+import sys
+
 import VENDORDRILL_DATA_CONNECTION as VDC
 import email_functions as ef
 import read_data as rd
 import refresh_excel as re
+from admin import admin_print
+
+# comment out sys.stdout line to see console print
+sys.stdout = open("admin_report.txt", "w")
 
 """
 VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
@@ -39,16 +45,16 @@ VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 """
 
 q_arr = rd.read_report_details()    # step 1: initiate VDC and query HD server
-print("q_arr var complete \n starting VDC")
+admin_print("q_arr var complete ---> starting VDC")
 VDC.vendorDrillConnection(q_arr)
-print("VDC complete and CSV's comprised \n starting refresh and verify")
+admin_print("VDC complete and CSV's comprised ---> starting refresh and verify")
 """
 outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
 re.refresh_xlsx_paths()             # step 2: Refresh Data # this works for the new xl data
-print("Refresh and verify complete \n composing email")     # referential data only works on Blake's computer
+admin_print("Refresh and verify complete ---> composing email")     # referential data only works on Blake's computer
                                                             # timing the refresh function and applying its duration wont work because it will flag an excel error
                                     # includes step 3 (more efficient)
                                     # step 3: Verify XL data meets metadata criteria
@@ -59,8 +65,14 @@ this is explicit to xlsx files
 also verifies xl paths that have met a given criteria 
 """
 
-ef.email_everyone()                 # step 3: Email everyone
-print("Program complete")
+ef.email_everyone()                 # step 4: Email everyone
+
+ef.admin_report()                   # step 4.1: email admin_report.txt to admin account
+
+admin_print("Program complete")
 """
 Takes REPORT_DETAIL.csv and finds required items for email and sends content to desired email recipients 
 """
+
+
+sys.stdout.close()
