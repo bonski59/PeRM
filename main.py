@@ -39,16 +39,16 @@ VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 """
 
 q_arr = rd.read_report_details()    # step 1: initiate VDC and query HD server
-input("q_arr var complete \n starting VDC")
+print("q_arr var complete \n starting VDC")
 VDC.vendorDrillConnection(q_arr)
-input("VDC complete and CSV's comprised \n starting refresh and verify")
+print("VDC complete and CSV's comprised \n starting refresh and verify")
 """
 outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
 re.refresh_xlsx_paths()             # step 2: Refresh Data # this works for the new xl data
-input("Refresh and verify complete \n composing email")     # referential data only works on Blake's computer
+print("Refresh and verify complete \n composing email")     # referential data only works on Blake's computer
                                                             # timing the refresh function and applying its duration wont work because it will flag an excel error
                                     # includes step 3 (more efficient)
                                     # step 3: Verify XL data meets metadata criteria

@@ -123,7 +123,7 @@ def email_everyone():                   # explict function that will be imported
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
             else:
                                             # compose dict for functional reference later
-                email_content = {'recipients_arr': "blake.ufp@gmail.com,corbinkelly15@gmail.com",  # TODO change to df['MAILING_LIST'][loop_length] when live
+                email_content = {'recipients_arr': df['MAILING_LIST'][loop_length],  # TODO change to df['MAILING_LIST'][loop_length] when live - "blake.ufp@gmail.com,corbinkelly15@gmail.com"
                                  'subject': str(df['EMAIL_SUBJECT'][loop_length]),
                                  'message': str(df['EMAIL_BODY'][loop_length]),
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
