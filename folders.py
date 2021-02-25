@@ -14,7 +14,7 @@ filepaths by just changing the "testing = "bool"" to whatever the situation is. 
 
 
 class Paths:
-    testing = True
+    testing = False
     if not testing:
         cwd = r"{}\dataManagement\LiveData".format(os.getcwd())
     else:
@@ -91,5 +91,5 @@ def change_csv_xl_filepaths_to_local_directory():  # explicit function that inte
         else:
             pass
 
-
-change_csv_xl_filepaths_to_local_directory()
+# testing
+# change_csv_xl_filepaths_to_local_directory()
