@@ -2,7 +2,6 @@
 # only classes
 import os
 import time
-
 import pandas as pd
 
 """
@@ -26,6 +25,7 @@ class Paths:
     dataFolder = r"{}".format(cwd)
     queryCSV = r"{}\QUERY_DETAIL.csv".format(cwd)  # use this for local ops
     reportCSV = r"{}\REPORT_DETAIL.csv".format(cwd)  # use this for local ops
+
 
 def change_csv_xl_filepaths_to_local_directory():  # explicit function that interacts with LiveData\REPORT_DETAIL.csv
     csv_path = r"{}\dataManagement\LiveData\REPORT_DETAIL.csv".format(os.getcwd())
