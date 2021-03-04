@@ -35,6 +35,8 @@ from admin import admin_print
 # comment out sys.stdout line to see console print
 sys.stdout = open("admin_report.txt", "w")
 
+# this should end up in the cloud-integration branch
+
 """
 VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
