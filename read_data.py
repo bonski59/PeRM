@@ -1,9 +1,8 @@
 import os
-
 import pandas as pd
-
 import folders
 from admin import *
+
 start_admin()
 
 def read_report_details():  # reads csv and pulls valid query txt/corresponding csv location files into an array
