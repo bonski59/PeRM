@@ -7,14 +7,15 @@ from io import StringIO
 from admin import *
 start_admin()
 # make config file variables
+
 config_file = r"{}\config.ini".format(os.getcwd())
 config = ConfigParser()
 config.read(config_file)
 
 # initialize temp folders
-if __name__ == "__main__":
-    download = r".\download"
-    upload = r".\upload"
+"""if __name__ == "__main__":
+    download = ".\\download"
+    upload = ".\\upload"
 
     def mk_dir(dir):
         if not os.path.isdir(dir):
@@ -22,7 +23,7 @@ if __name__ == "__main__":
         return
 
     mk_dir(download)
-    mk_dir(upload)
+    mk_dir(upload)"""
 
 # build class for dev tools
 class azureDevTools:
@@ -100,8 +101,8 @@ class azureDevTools:
         return
 
     @classmethod
-    def list_blobs(cls):
-        print("\nListing blobs...")
+    def list(cls):
+        print("\n Listing blobs...")
         blob_arr = []
         # List the blobs in the container
         blob_list = cls.container_client.list_blobs()
