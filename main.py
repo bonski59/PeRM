@@ -25,15 +25,16 @@ step 4: Email results
 """
 
 import sys
-
 import VENDORDRILL_DATA_CONNECTION as VDC
 import email_functions as ef
 import read_data as rd
 import refresh_excel as re
-from admin import admin_print
+from admin import *  
+
+start_admin()
 
 # comment out sys.stdout line to see console print
-sys.stdout = open("admin_report.txt", "w")
+
 
 # this should end up in the cloud-integration branch
 
@@ -77,4 +78,4 @@ Takes REPORT_DETAIL.csv and finds required items for email and sends content to 
 """
 
 
-sys.stdout.close()
+end_admin()

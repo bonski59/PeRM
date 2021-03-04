@@ -11,8 +11,8 @@ from email.mime.text import MIMEText
 
 import pandas as pd
 import folders
-from admin import admin_print
-
+from admin import *
+start_admin()
 """ email credentials will need to be changed """
 if folders.Paths.testing:
     email_credentials = {
@@ -157,3 +157,5 @@ def admin_report():
                "See Attached",
                adm_rep)
     return
+
+end_admin()

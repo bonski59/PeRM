@@ -1,8 +1,8 @@
 import pandas as pd
 import pyodbc
 
-from admin import admin_print
-
+from admin import *
+start_admin()
 
 def vendorDrillConnection(query_arr):       # designed to ingest array like "[[*.csv, *.txt], [*.csv, *.txt]]"
     for i in query_arr:
@@ -27,5 +27,5 @@ def vendorDrillConnection(query_arr):       # designed to ingest array like "[[*
         -CK
         """
     return
-
+end_admin()
 # excercise can we run perm with every query text file and pull data from the HD server

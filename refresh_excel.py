@@ -1,10 +1,11 @@
 import pandas as pd
 import pywintypes
+
 import win32com.client as win32
 import folders
 import read_data as rd
-from admin import admin_print
-
+from admin import *
+start_admin()
 
 def refresh(xlsx_filepath):
     Xlsx = win32.DispatchEx('Excel.Application')
@@ -62,5 +63,6 @@ def refresh_xlsx_paths():
     df.to_csv(folders.Paths.reportCSV)
     return
 
+end_admin()
 
 
