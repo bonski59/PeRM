@@ -5,7 +5,7 @@ from configparser import ConfigParser
 import pandas as pd
 from io import StringIO
 from admin import *
-start_admin()
+
 # make config file variables
 
 config_file = r"{}\config.ini".format(os.getcwd())
@@ -162,5 +162,3 @@ class azureDevTools:
         df = pd.read_csv(StringIO(blob_string))
         return df
 
-
-end_admin()

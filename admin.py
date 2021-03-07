@@ -1,15 +1,22 @@
 from datetime import datetime
-import sys
+import os
+import folders
+
 
 def admin_print(string):
+    file = open(folders.Paths.a_file, 'a')
     now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    print("{}:   {}".format(now, string))
+    print("\n {}:   {}".format(now, string))
+    file.write("\n {}:   {}".format(now, string))
+    file.close()
     return
 
 def start_admin():
-    sys.stdout = open("admin_report.txt", "w")
+    if os.path.isfile(folders.Paths.a_file):
+        os.remove(folders.Paths.a_file)
+    file = open(folders.Paths.a_file, 'w')
+    file.close()
     return
 
-def end_admin():
-    sys.stdout.close()
+
 

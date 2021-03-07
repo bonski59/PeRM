@@ -1,11 +1,11 @@
 import pandas as pd
 import pywintypes
-
+import os
 import win32com.client as win32
 import folders
 import read_data as rd
 from admin import *
-start_admin()
+
 
 def refresh(xlsx_filepath):
     Xlsx = win32.DispatchEx('Excel.Application')
@@ -35,14 +35,15 @@ def refresh_xlsx_paths():
     # print(df_status)
     status_true = []
     status_false = []
-    for i in df_status:
-        refresh(i)
-        if not rd.confirm_xlsx_verification(i):
-            status_false.append(i)
+    for leaf in df_status:
+        root = r"{}\{}".format(folders.Paths.reports_xlsx, leaf)
+        refresh(root)
+        if not rd.confirm_xlsx_verification(root):
+            status_false.append(leaf)
             # update pandas verification column to False .iloc "file"
 
         else:
-            status_true.append(i)
+            status_true.append(leaf)
     admin_print("Output Verified Files: \n {} \n The following have been verified".format(status_true))
     df_true = df['Verification_Status'].loc[df['Report_Filepath'].isin(status_true)]
 
@@ -63,6 +64,5 @@ def refresh_xlsx_paths():
     df.to_csv(folders.Paths.reportCSV)
     return
 
-end_admin()
 
 

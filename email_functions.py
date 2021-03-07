@@ -12,7 +12,7 @@ from email.mime.text import MIMEText
 import pandas as pd
 import folders
 from admin import *
-start_admin()
+
 """ email credentials will need to be changed """
 if folders.Paths.testing:
     email_credentials = {
@@ -108,7 +108,7 @@ def email_everyone():                   # explict function that will be imported
     loop_length = int(df.shape[0]) - 1  # calculates loop length by number of lines in csv
     while loop_length >= 0:             # 2: Build loop
         if not df['Verification_Status'][loop_length] or df['REPORT_STATUS'][loop_length] != 'ACTIVE':
-            admin_print("**NOT VERIFIED OR NOT ACTIVE : {}**".format(df['Report_Filepath'][loop_length]))
+            admin_print("**  {}  -- NOT VERIFIED OR NOT ACTIVE --  f/p: {}  **".format(df['REPORT_NAME'][loop_length], df['Report_Filepath'][loop_length]))
             loop_length -= 1
             pass
         else:
@@ -120,7 +120,7 @@ def email_everyone():                   # explict function that will be imported
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
             else:
                                             # compose dict for functional reference later
-                email_content = {'recipients_arr': df['MAILING_LIST'][loop_length],  #  change to df['MAILING_LIST'][loop_length] when live - "blake.ufp@gmail.com,corbinkelly15@gmail.com"
+                email_content = {'recipients_arr': "Blake.Kelly.evo@gmail.com",  #  change to df['MAILING_LIST'][loop_length] when live - "blake.ufp@gmail.com,corbinkelly15@gmail.com"
                                  'subject': str(df['EMAIL_SUBJECT'][loop_length]),
                                  'message': str(df['EMAIL_BODY'][loop_length]),
                                  'attachment_fp_arr': df['Report_Filepath'][loop_length]}
@@ -137,10 +137,10 @@ def email_everyone():                   # explict function that will be imported
                 send_email(i,
                            email_content['subject'],
                            email_content['message'],
-                           email_content['attachment_fp_arr'])
+                           r"{}\{}".format(folders.Paths.reports_xlsx, email_content['attachment_fp_arr']))
 
 
-            admin_print("SENT \n {} \n {} \n {} \n {}".format(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr']))
+            admin_print("\n SENT \n {} \n {} \n {} \n {}".format(email_content['recipients_arr'], email_content['subject'], email_content['message'], email_content['attachment_fp_arr']))
             loop_length -= 1                # subtract iterable "loop_length" so that the "while" loop will end
     return                              # exit function
 
@@ -150,7 +150,7 @@ def admin_report():
     send info to admin account
     """
     now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    adm_rep = r"{}\admin_report.txt".format(folders.Paths.dataFolder)
+    adm_rep = r"{}\admin_report.txt".format(os.getcwd())
     admin_email = email_credentials['username']
     send_email(admin_email,
                "PeRM: ADMIN REPORT {}".format(now),
@@ -158,4 +158,3 @@ def admin_report():
                adm_rep)
     return
 
-end_admin()

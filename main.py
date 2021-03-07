@@ -46,18 +46,18 @@ VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 """
-
-q_arr = rd.read_report_details()    # step 1: initiate VDC and query HD server
-admin_print("q_arr var complete ---> starting VDC")
-VDC.vendorDrillConnection(q_arr)
-admin_print("VDC complete and CSV's comprised ---> starting refresh and verify")
+admin_print("Start")
+#q_arr = rd.read_report_details()    # step 1: initiate VDC and query HD server
+admin_print("----> q_arr var complete \n\t---> starting VDC")
+#VDC.vendorDrillConnection(q_arr)
+admin_print("----> VDC complete and CSV's comprised \n\t---> starting refresh and verify")
 """
 outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
 re.refresh_xlsx_paths()             # step 2: Refresh Data # this works for the new xl data
-admin_print("Refresh and verify complete ---> composing email")     # referential data only works on Blake's computer
+admin_print("----> Refresh and verify complete \n\t---> composing email")     # referential data only works on Blake's computer
                                                             # timing the refresh function and applying its duration wont work because it will flag an excel error
                                     # includes step 3 (more efficient)
                                     # step 3: Verify XL data meets metadata criteria
@@ -69,7 +69,7 @@ also verifies xl paths that have met a given criteria
 """
 
 ef.email_everyone()                 # step 4: Email everyone
-
+admin_print("----> Mass email Complete \n\t---> Emailing Admin")
 ef.admin_report()                   # step 4.1: email admin_report.txt to admin account
 
 admin_print("Program complete")
@@ -78,4 +78,4 @@ Takes REPORT_DETAIL.csv and finds required items for email and sends content to 
 """
 
 
-end_admin()
+

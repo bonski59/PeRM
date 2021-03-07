@@ -2,13 +2,13 @@ import pandas as pd
 import pyodbc
 
 from admin import *
-start_admin()
+
 
 def vendorDrillConnection(query_arr):       # designed to ingest array like "[[*.csv, *.txt], [*.csv, *.txt]]"
     for i in query_arr:
         output_filepath = i[0]              # this is the csv value from query_arr[i][0]
         admin_print("Sending Query to VDC: {}".format(i[1]))
-        result_set = pd.read_sql(open(i[1]).read(), pyodbc.connect("DSN=VDC_UFP", autoCommit=True))
+        result_set = pd.read_sql(open(i[1]).read(), pyodbc.connect("DSN=VDDC_UFP", autoCommit=True))
         admin_print("Txt query sent to dbc: {}".format(i[1]))
 
         """ 
@@ -27,5 +27,5 @@ def vendorDrillConnection(query_arr):       # designed to ingest array like "[[*
         -CK
         """
     return
-end_admin()
+
 # excercise can we run perm with every query text file and pull data from the HD server
