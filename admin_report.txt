@@ -1,0 +1,9 @@
+02/03/2021 11:12:30:   q_arr var complete ---> starting VDC
+02/03/2021 11:12:30:   VDC complete and CSV's comprised ---> starting refresh and verify
+02/03/2021 11:12:30:   Refresh and verify complete ---> composing email
+02/03/2021 11:12:30:   **NOT VERIFIED OR NOT ACTIVE : C:\Users\us160212\Documents\GitHub\PeRM\dataManagement\LiveData\reports_xlsx\New SKU Sales.xlsx**
+02/03/2021 11:12:30:   **NOT VERIFIED OR NOT ACTIVE : C:\Users\us160212\Documents\GitHub\PeRM\dataManagement\LiveData\reports_xlsx\On Hand and No Sales - IS version.xlsx**
+02/03/2021 11:12:30:   **NOT VERIFIED OR NOT ACTIVE : nan**
+02/03/2021 11:12:30:   **NOT VERIFIED OR NOT ACTIVE : nan**
+02/03/2021 11:12:30:   **NOT VERIFIED OR NOT ACTIVE : nan**
+02/03/2021 11:12:30:   **NOT VERIFIED OR NOT ACTIVE : nan**
