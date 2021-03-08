@@ -1,5 +1,5 @@
 import os, ntpath
-from azure.storage.blob import BlobServiceClient
+from azure.storage.blob import BlobServiceClient, BlobClient
 from azure.storage.blob.blockblobservice import BlockBlobService
 from configparser import ConfigParser
 import pandas as pd
@@ -42,6 +42,18 @@ class azureDevTools:
     except Exception as ex:
         print('Exception: container client issue')
         print(ex)
+
+    @classmethod
+    def tgt_blob(cls, blob_name):
+        blob_client = BlobClient.from_connection_string(conn_str=cls.connect_str, container_name=cls.container_name,
+                                                        blob_name=blob_name)
+        return blob_client
+
+    @classmethod
+    def confirm_blob(cls, blob_name):
+        client = cls.tgt_blob(blob_name)
+        exists = client.exists()
+        return exists
 
     @classmethod
     def dev_mk_txt_file(cls, filename):  # add file to dev-testing container on Azure
@@ -161,4 +173,3 @@ class azureDevTools:
         blob_string = cls.block_blob_service.get_blob_to_text(cls.container_name, cloud_csv).content
         df = pd.read_csv(StringIO(blob_string))
         return df
-
