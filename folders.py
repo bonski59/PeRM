@@ -20,7 +20,6 @@ class Paths:
     reports_xlsx = r"{}\reports_xlsx".format(cwd)
     sales_csv = r"{}\sales_csv".format(cwd)
     dataFolder = r"{}".format(cwd)
-    queryCSV = r"{}\QUERY_DETAIL.csv".format(cwd)  # use this for local ops
     reportCSV = r"{}\REPORT_DETAIL.csv".format(cwd)  # use this for local ops
     a_file = r"{}\admin_report.txt".format(os.getcwd())
 

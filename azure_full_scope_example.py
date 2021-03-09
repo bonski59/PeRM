@@ -121,7 +121,8 @@ class azureDevTools:
         print("Container: {}".format(cls.container_name))
         for blob in blob_list:
             blob_arr.append(blob.name)
-            print("\t" + blob.name)
+            # print("\t" + blob.name)
+        print(str(blob_arr) + "\n")
         return blob_arr
 
     @classmethod
@@ -173,3 +174,4 @@ class azureDevTools:
         blob_string = cls.block_blob_service.get_blob_to_text(cls.container_name, cloud_csv).content
         df = pd.read_csv(StringIO(blob_string))
         return df
+
