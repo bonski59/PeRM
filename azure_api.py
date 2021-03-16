@@ -92,7 +92,10 @@ class azureDevTools:
         return
 
     @classmethod
-    def upload_file(cls, filepath):
+    def upload_file(
+            cls, filepath,
+            blob_name
+    ):
         # confirm fp exist
         # if exist send
         head, tail = ntpath.split(filepath)
@@ -102,8 +105,11 @@ class azureDevTools:
         else:
             print("\n Uploading File: {}".format(tail))
             try:
+                if blob_name:
+                    tail = "{}/{}".format(blob_name, tail)
                 blob_client = cls.blob_service_client.get_blob_client(container=cls.container_name, blob=tail)
                 blob_client.upload_blob(filepath)
+
                 print("\t Upload Successful: {}".format(tail))
             except Exception as xx:
                 print('Upload Aborted for the Following')
@@ -113,7 +119,7 @@ class azureDevTools:
         return
 
     @classmethod
-    def list(cls):
+    def blob_list(cls):
         print("\n Listing blobs...")
         blob_arr = []
         # List the blobs in the container
@@ -124,6 +130,15 @@ class azureDevTools:
             # print("\t" + blob.name)
         print(str(blob_arr) + "\n")
         return blob_arr
+
+    @classmethod
+    def siphon_blob_list(cls, keyword):
+        baselist = cls.blob_list()
+        mylist = []
+        for i in baselist:
+            if keyword in i:
+                mylist.append(i)
+        return mylist
 
     @classmethod
     def delete_container(cls):
@@ -170,8 +185,25 @@ class azureDevTools:
             print(a1)
 
     @classmethod
+    def blob_to_txt(cls, cloud_txt):
+        str1 = cls.block_blob_service.get_blob_to_text(cls.container_name, cloud_txt)
+        arr1 = str1.content
+        return arr1
+
+    @classmethod
     def read_csv(cls, cloud_csv):
         blob_string = cls.block_blob_service.get_blob_to_text(cls.container_name, cloud_csv).content
         df = pd.read_csv(StringIO(blob_string))
         return df
+
+    @classmethod
+    def upload_and_overwrite(cls, filepath, blobbase):
+        leaf = os.path.basename(filepath)
+        new_blob = "{}/{}".format(blobbase, leaf)
+        if new_blob in cls.blob_list():
+            cls.delete_blobs(new_blob)
+        cls.upload_file(filepath, blobbase)
+
+
+
 

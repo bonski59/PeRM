@@ -22,4 +22,5 @@ class Paths:
     dataFolder = r"{}".format(cwd)
     reportCSV = r"{}\REPORT_DETAIL.csv".format(cwd)  # use this for local ops
     a_file = r"{}\admin_report.txt".format(os.getcwd())
+    upload_path = r"{}\upload".format(os.getcwd())
 

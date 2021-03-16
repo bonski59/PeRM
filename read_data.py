@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import folders
 from admin import *
-from azure_full_scope_example import azureDevTools as az
+from azure_api import azureDevTools as az
 from configparser import ConfigParser
 
 config_file = r"{}\config.ini".format(os.getcwd())
