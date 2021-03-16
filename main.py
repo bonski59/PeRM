@@ -24,10 +24,9 @@ step 4: Email results
     - - - recommend using gmail if outlook is configured with gmail account instead of authentic microsoft account
 """
 
-import sys
+
 import VENDORDRILL_DATA_CONNECTION as VDC
 import email_functions as ef
-import read_data as rd
 import refresh_excel as re
 from admin import *  
 
@@ -47,16 +46,15 @@ VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 VERIFY TESTING BOOLEAN in folders.py BEFORE EXECUTION
 """
 admin_print("Start")
-#q_arr = rd.read_report_details()    # step 1: initiate VDC and query HD server
-admin_print("----> q_arr var complete \n\t---> starting VDC")
-#VDC.vendorDrillConnection(q_arr)
+admin_print("----> starting VDC")
+VDC.vdc()                           # step 1 : initiate VDC and upload csv's
 admin_print("----> VDC complete and CSV's comprised \n\t---> starting refresh and verify")
 """
 outputs multiple csv's to sales_csv using query_txt
 this satisfies Step 1 
 """
 
-re.refresh_xlsx_paths()             # step 2: Refresh Data # this works for the new xl data
+#re.refresh_xlsx_paths()             # step 2: Refresh Data # this works for the new xl data
 admin_print("----> Refresh and verify complete \n\t---> composing email")     # referential data only works on Blake's computer
                                                             # timing the refresh function and applying its duration wont work because it will flag an excel error
                                     # includes step 3 (more efficient)

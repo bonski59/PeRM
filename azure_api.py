@@ -203,7 +203,7 @@ class azureDevTools:
         if new_blob in cls.blob_list():
             cls.delete_blobs(new_blob)
         cls.upload_file(filepath, blobbase)
-
+        admin_print("Upload Successful: " + new_blob)
 
 
 
